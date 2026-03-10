@@ -1,0 +1,47 @@
+{
+	"@type":"Process",
+	"Name":"S_21_Kostenarten_Meldedaten",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"S_21_Kostenarten_Meldedaten.ti",
+	"VariablesUIData":
+	[
+		"VarType=32€ColType=827€",
+		"VarType=32€ColType=827€"
+	],
+	"DataSource":
+	{
+		"Type":"ODBC",
+		"dataSourceNameForClient":"co1",
+		"dataSourceNameForServer":"co1",
+		"password":"kD^AcZ<?czplg96fJp;Qb?OpmmD^:_OmWqVn_u_0FuO:<bSXe=J2bOLWQaLC;<Uo>;AhcpbF@]eq:SN@V`uMp`gJ>4sp?TGcq=VOJFd_3uQV`PeethOIafo3MD[TFv7Glss|2TvATvNk8P@sLxuEZJZFNavr8;gMXca?H>hVl4wQCF\\K@Lrz5`vl`KrV{3`qn1W;Yg8",
+		"query":"SELECT\r\nDISTINCT\r\na.KOSTENART, a.KOSTENART || '_Meldedaten'\r\nFROM\r\nDTL_KST_MELDEDATEN_MONAT a \r\nWHERE\r\na.KOSTENSTELLE NOT IN(to_char('KONZERN_IKB'),to_char('AG_MD'),to_char('P_CAM'),to_char('P_IKB_INTERNATIONAL'),to_char('P_IMAS'),\r\nto_char('P_MOBILIEN_LEASING'),to_char('P_PE')) AND a.WERT_MONAT <> 0\r\n\r\nAND\r\n\r\nTO_DATE (a.MONATSSCHEIBE, 'Mon_YY') >= TO_DATE('01.01.2025','DD.MM.YYYY')\r\nORDER BY 1 ASC",
+		"userName":"f_prod_data",
+		"usesUnicode":true
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pResult",
+			"Prompt":"Ergebnisdatei für die Anzahl angelegter Kostenarten (Meldedaten)",
+			"Value":"S_21_Kostenarten_Meldedaten",
+			"Type":"String"
+		}
+	],
+	"Variables":
+	[
+		{
+			"Name":"vParent",
+			"Type":"String",
+			"Position":1,
+			"StartByte":0,
+			"EndByte":0
+		},
+		{
+			"Name":"vChild",
+			"Type":"String",
+			"Position":2,
+			"StartByte":0,
+			"EndByte":0
+		}
+	]
+}

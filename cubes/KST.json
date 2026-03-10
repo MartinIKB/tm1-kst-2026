@@ -1,0 +1,34 @@
+{
+	"@type":"Cube",
+	"Name":"KST",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Kostenstellen')"
+		},
+		{
+			"@id":"Dimensions('Kostenarten')"
+		},
+		{
+			"@id":"Dimensions('Freigabe')"
+		},
+		{
+			"@id":"Dimensions('Sichtweise')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('Zeit')"
+		}
+	],
+	"Rules@Code.link":"KST.rules",
+	"MeasuresDimension":
+	{
+		"@id":"Dimensions('Version')"
+	},
+	"Views@Code.links":
+	[
+		"KST.views/VW_10190.json"
+	]
+}

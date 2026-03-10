@@ -1,0 +1,19 @@
+#region Prolog
+# ================================
+# Process: J_10_Gesamtprozess
+# Master process (quasi chore)
+# Runs sub processes sequentially
+# ================================
+
+
+# ================================
+# Sub processes chain
+# ================================
+ExecuteProcess('S_10_Kostenstellen');
+ExecuteProcess('S_20_Kostenarten');
+ExecuteProcess('S_21_Kostenarten_Buchungen');
+ExecuteProcess('D_10_DTL_KST_BELEGE');
+ExecuteProcess('D_20_DTL_KST_PLANDATEN');
+ExecuteProcess('D_30_VAK');
+
+#endregion

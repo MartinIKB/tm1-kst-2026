@@ -1,0 +1,34 @@
+#region Prolog
+
+NumRowsRead = 0;
+NumRowsProcessed = 0;
+sCube = 'KST';
+sDim = 'Kostenarten';
+#vAnzahlSaetzeVerarbeitung = 1000;
+vAnzahlSaetzeInfo = 1000;
+#endregion
+#region Metadata
+
+vAttribut = CellGetS('}ElementAttributes_Kostenarten', vKostenarten, 'Typ');
+
+
+IF(vAttribut @= 'Buchung');
+    #IF(NumRowsProcessed<vAnzahlSaetzeVerarbeitung);
+
+    #Buchung aus der Hierarchie löschen
+    DimensionElementDelete( sDim, vKostenarten );
+
+    Ausgabe_Name = vKostenarten;
+    NumRowsProcessed = NumRowsProcessed + 1;
+
+    #Alle vAnzahlSaetze eine Statusmeldung im Serverlog ausgeben
+    vGanzeZahl = ROUND(NumRowsProcessed/vAnzahlSaetzeInfo);
+
+    IF(NumRowsProcessed/vAnzahlSaetzeInfo=vGanzeZahl);
+        Ausgabe = '### Status Info: ' | NumberToString(NumRowsProcessed) | ' Sätze verarbeitet. --- Letzer Datensatz: ' | Ausgabe_Name;
+        LogOutput( 'INFO', Ausgabe);
+    ENDIF;
+    #ENDIF;
+ENDIF;
+
+#endregion

@@ -1,0 +1,41 @@
+#region Prolog
+MinorErrorLogMax = -1;
+OnMinorErrorDoItemSkip = 1;
+SetInputCharacterSet('TM1CS_ISO_8859_1');
+
+NumRowsRead = 0;
+NumRowsProcessed = 0;
+sCube = 'KST';
+sDim = 'Kostenarten';
+vAnzahlSaetzeInfo = 1000;
+
+#endregion
+#region Metadata
+
+IF ( DimensionElementExists ( sDim, vChild ) = 0 );
+#Buchung in der Dimension anlegen und unter Parent-Element verschieben
+  DimensionElementInsert ( sDim , '', vChild, 'N' );
+  DimensionElementComponentAdd ( sDim , vParent, vChild, 1 );
+  NumRowsProcessed = NumRowsProcessed + 1;
+
+  vGanzeZahl = ROUND(NumRowsProcessed/vAnzahlSaetzeInfo); 
+# Status Info Ausgabe
+   IF(NumRowsProcessed/vAnzahlSaetzeInfo=vGanzeZahl);
+        Ausgabe = '### Status Info: ' | NumberToString(NumRowsProcessed) | ' Buchungen verarbeitet. --- Letzer Datensatz: ' | vChild;
+        LogOutput( 'INFO', Ausgabe);
+    ENDIF; 
+ENDIF;
+
+#endregion
+#region Data
+
+# Caption des Child Elements hinzufügen
+AttrPutS ( vChild_Alias, sDim, vChild, 'Caption' );
+
+# Kostenarten Typ des Child Elements hinzufügen
+AttrPutS ( vChild_Typ, sDim, vChild, 'Typ' );
+#endregion
+#region Epilog
+
+
+#endregion

@@ -1,0 +1,41 @@
+#region Prolog
+MinorErrorLogMax = -1;
+OnMinorErrorDoItemSkip = 1;
+SetInputCharacterSet('TM1CS_ISO_8859_1');
+
+NumRowsRead = 0;
+NumRowsProcessed = 0;
+sCube = 'KST';
+sDim = 'Kostenarten';
+
+
+IF (CubeExists(sCube) <> 0);
+  CurrentLogSetting = CubeGetLogChanges(sCube);
+  CubeSetLogChanges(sCube, 0);
+ENDIF;
+
+#endregion
+#region Metadata
+
+# Neue Kostenarten (Konten) unter 'Neue_Kostenarten' anlegen
+IF ( DimensionElementExists ( sDim, vChild ) = 0 );
+
+  #vLogOutput = vLogOutput | 'Datensatz # ' | NumberToString(NumRowsRead) | ' --> ' | vParent | ';' | vChild | '#####' ;
+  DimensionElementInsert ( sDim , '', vChild, 'N' );
+  DimensionElementComponentAdd ( sDim , vParent, vChild, 1 );
+  NumRowsProcessed = NumRowsProcessed + 1; 
+ENDIF;
+
+#endregion
+#region Data
+# Caption des Child Elements hinzufügen
+AttrPutS ( vAlias_Child, sDim, vChild, 'Caption' );
+
+# Kostenarten Typ des Child Elements hinzufügen
+AttrPutS ( vChild_Typ, sDim, vChild, 'Typ' );
+
+#endregion
+#region Epilog
+
+
+#endregion

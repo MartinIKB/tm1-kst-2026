@@ -1,0 +1,33 @@
+{
+	"@type":"Hierarchy",
+	"Name":"Sichtweise",
+	"Elements":
+	[
+		{
+			"Name":"Sichtweise",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"monatlich",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"kumuliert",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"Sichtweise",
+			"ComponentName":"monatlich",
+			"Weight":0
+		},
+		{
+			"ParentName":"Sichtweise",
+			"ComponentName":"kumuliert",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

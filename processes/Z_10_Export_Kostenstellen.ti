@@ -1,0 +1,49 @@
+#region Prolog
+
+#ODBC Verbindung aufbauen
+ODBCOpen('co1', 'f_prod_data','access_prod'); 
+ODBCOutput('co1','DELETE from allg_hierarchie WHERE dimension=''Kostenstelle'''); 
+
+
+#Region  Metadaten
+
+#Parent Element ermitteln
+IF (vKostenstelle@='Kostenstellen');
+  vParent='NULL';
+ELSE;
+  vParent=''''|ELPAR('Kostenstellen', vKostenstelle,1)|'''';
+ENDIF;
+
+#Caption (Alias) der Kostenstelle ermitteln
+IF (ATTRS('Kostenstellen', vKostenstelle, 'Caption')@='');
+  vAlias='NULL';
+ELSE;
+  vAlias=''''|ATTRS('Kostenstellen', vKostenstelle, 'Caption' )|''''; 
+ENDIF;
+
+vChild=''''|vKostenstelle|'''';
+vKonsolidierungsfaktor=''''|numbertostring(ElementWeight('Kostenstellen', 'Kostenstellen',ELPAR('Kostenstellen', vKostenstelle,1 ), vKostenstelle ))|'''';
+vAttribut1='NULL';
+
+#ElementTyp ermitteln (C, N, S, NULL)
+IF (ElementType( 'Kostenstellen','Kostenstellen', vKostenstelle )@='');
+  vSType='NULL';
+ELSE;
+  vSType=''''|ElementType( 'Kostenstellen','Kostenstellen', vKostenstelle )|'''';
+ENDIF;
+
+#Level ermitteln
+vAttribut1 = numbertostring(ElementLevel('Kostenstellen','Kostenstellen', vKostenstelle));
+
+
+
+
+#Daten in die Tabelle allg_hierarchie schreiben   
+vSQL='insert into allg_hierarchie values (''Kostenstelle'', '|vChild|','|vAlias|','|vParent|','|vKonsolidierungsfaktor|','|vAttribut1|',sysdate,'|vSType|')';
+ODBCOutput('co1', vSQL);
+#endregion
+#region Epilog
+
+#ODBC Verbindung schließen
+ODBCClose('co1');
+#endregion

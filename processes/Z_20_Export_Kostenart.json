@@ -1,0 +1,28 @@
+{
+	"@type":"Process",
+	"Name":"Z_20_Export_Kostenart",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"Z_20_Export_Kostenart.ti",
+	"VariablesUIData":
+	[
+		"VarType=32€ColType=827€"
+	],
+	"DataSource":
+	{
+		"Type":"TM1DimensionSubset",
+		"dataSourceNameForClient":"Kostenarten:Kostenarten",
+		"dataSourceNameForServer":"Kostenarten:Kostenarten",
+		"subset":"All"
+	},
+	"Parameters":[],
+	"Variables":
+	[
+		{
+			"Name":"vKostenart",
+			"Type":"String",
+			"Position":1,
+			"StartByte":0,
+			"EndByte":0
+		}
+	]
+}

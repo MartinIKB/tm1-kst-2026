@@ -1,0 +1,39 @@
+{
+	"@type":"Process",
+	"Name":"S_10_Kostenstellen",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"S_10_Kostenstellen.ti",
+	"VariablesUIData":
+	[
+		"VarType=32€ColType=827€",
+		"VarType=32€ColType=827€"
+	],
+	"DataSource":
+	{
+		"Type":"ODBC",
+		"dataSourceNameForClient":"co1",
+		"dataSourceNameForServer":"co1",
+		"password":"jqdE]h>=2ol=`Qm]^WdHqZ\\<T^DWVrBdm`_W[d_<8XVRNh3O`a=WtRqe=ceqK\\Qoj>YdcA_v6]x8jvW4G@MtLjjS>Hq`AX4=qxh@`fBvx8j[]Mjedjgs=wQmtd:M9VwCe>ksB;DbTvH3Abel9IXEfO2\\R7ruU>h=9Jd_V>X^:w_jtsRD=_UqHAX9]AoklCmq1lUllNL",
+		"query":"SELECT\r\nDISTINCT \r\n'Neue_Kostenstellen',\r\na.kostenstelle\r\nFROM\r\nDTL_KST_BELEGE a\r\nWHERE\r\na.geschaeftsjahr>= '2025'\r\n\r\nUNION\r\n\r\nSELECT DISTINCT 'Neue_Kostenstellen', b.org_schl  FROM dtl_kst_plandaten b \r\nWHERE b.wert <> 0 AND ((b.geschaeftsjahr >= '2023' AND b.version = 0) OR (b.version = 1 AND b.geschaeftsjahr = '2024') OR (b.version = 1 AND b.geschaeftsjahr = '2025')) \r\n\r\nUNION\r\n\r\nSELECT DISTINCT 'Neue_Kostenstellen', c.kostenstelle FROM dtl_kst_meldedaten_neu c WHERE c.wert <> 0 and to_date(c.monatsscheibe, 'Mon_YY') >= '01-Jan-2025'\r\n\r\nUNION\r\n\r\nSELECT DISTINCT 'Neue_Kostenstellen', d.kostenstelle FROM dtl_kst_meldedaten_plan d WHERE d.wert <> 0 and to_date(d.monatsscheibe, 'Mon_YY') >= '01-Jan-2025'\r\n\r\norder by 2 ASC",
+		"userName":"f_prod_data",
+		"usesUnicode":true
+	},
+	"Parameters":[],
+	"Variables":
+	[
+		{
+			"Name":"vParent",
+			"Type":"String",
+			"Position":1,
+			"StartByte":0,
+			"EndByte":0
+		},
+		{
+			"Name":"vChild",
+			"Type":"String",
+			"Position":2,
+			"StartByte":0,
+			"EndByte":0
+		}
+	]
+}

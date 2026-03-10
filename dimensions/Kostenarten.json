@@ -1,0 +1,12 @@
+{
+	"@type":"Dimension",
+	"Name":"Kostenarten",
+	"Hierarchies@Code.links":
+	[
+		"Kostenarten.hierarchies/Kostenarten.json"
+	],
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('Kostenarten')/Hierarchies('Kostenarten')"
+	}
+}

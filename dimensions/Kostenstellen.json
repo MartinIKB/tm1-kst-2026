@@ -1,0 +1,12 @@
+{
+	"@type":"Dimension",
+	"Name":"Kostenstellen",
+	"Hierarchies@Code.links":
+	[
+		"Kostenstellen.hierarchies/Kostenstellen.json"
+	],
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('Kostenstellen')/Hierarchies('Kostenstellen')"
+	}
+}

@@ -1,0 +1,120 @@
+#region Prolog
+MinorErrorLogMax = -1;
+OnMinorErrorDoItemSkip = 1;
+dCube= 'KST';
+CurrentLogSetting = CubeGetLogChanges(dCube);
+CubeSetLogChanges(dCube, 0);
+NumRowsRead = 0;
+NumRowsProcessed = 0;
+vAnzahlSaetzeInfo = 1000;
+SetInputCharacterSet('TM1CS_ISO_8859_1');
+
+sProcName = 'D_10_DTL_KST_BELEGE';
+nRecTotal   = 0;
+nRecLoaded  = 0;
+nRecSkipped = 0;
+nRecError   = 0;
+sStartTime = TIMST(NOW, '\Y-\m-\d \h:\i:\s');
+
+LogOutput('INFO', sProcName | ' gestartet um ' | sStartTime);
+
+
+# Daten zunächst löschen
+s_View_target = 'DatenLoeschen';
+s_Subset_target = s_View_target |'_Subset' ;
+
+# Create target
+ViewCreate (dCube, s_View_target, 1);
+
+# Subsets erstellen - für "Entwicklung" und "Ist_EUR"
+
+SubsetCreatebyMDX( 'sEntwicklung', '{[Freigabe].[Freigabe].[Entwicklung]}', 1 );
+SubsetCreatebyMDX( 'sVersion', '{[Version].[Version].[Ist_EUR]}', 1 );
+
+ViewSubsetAssign (dCube, s_View_target , 'Freigabe' , 'sEntwicklung' );
+ViewSubsetAssign (dCube, s_View_target , 'Version' , 'sVersion' );
+
+# Daten im Subset löschen
+ViewZeroOut (dCube, s_View_target);
+
+#endregion
+#region Data
+vGanzeZahl = ROUND(NumRowsProcessed/vAnzahlSaetzeInfo); 
+vMonat  = Subst(vMonatsscheibe, 1, 3);
+vJahr = StringToNumber( Subst(vMonatsscheibe, 5, 2) );
+
+#Daten auf Sichtweise 'monatlich' in den Cube schreiben 
+IF (DIMIX('Kostenstellen', vKostenstelle) = 0);
+  nRecError = nRecError + 1;
+  nRecSkipped = nRecSkipped + 1;
+  LogOutput('ERROR', sProcName | ': unbekannte Kostenstelle "' | vKostenstelle | '" in Datensatz ' | NumberToString(nRecTotal)
+  );
+ELSEIF(DIMIX('Kostenarten', vKostenart) = 0);
+      nRecError = nRecError + 1;
+      nRecSkipped = nRecSkipped + 1;
+      LogOutput('ERROR', sProcName | ': unbekannte Kostenart "' | vKostenart | '" in Datensatz ' | NumberToString(nRecTotal)
+  );
+ELSE;
+    CellPutN(vWert, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, vVersion, vMonatsscheibe);
+    CellPutS(vBelegkopftext, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, 'Belegkopftext', vMonatsscheibe);
+    CellPutS(vBelegtext, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, 'Belegtext', vMonatsscheibe);
+    CellPutS(vBuchungsdatum, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, 'Buchungsdatum', vMonatsscheibe);
+    CellPutS(vBuchungskonto, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, 'Buchungskonto', vMonatsscheibe);
+    nRecLoaded = nRecLoaded + 1;
+ENDIF;
+
+# Mapping-String aller Monate (jeweils 3 Zeichen)
+# sMap = 'JanFebMrzAprMaiJunJulAugSepOktNovDez';
+sMap = 'JanFebMrzAprMaiJunJulAugSepOktNovDezA13A14A15A16';
+
+# Position der Monatsabkürzung im Mapping finden
+p = Scan(vMonat, sMap);
+
+IF (p > 0);
+    # Monat berechnen: Startposition / 3 + 1
+    nMonatsscheibe = (p - 1) / 3 + 1;
+ELSE;
+    # Falls ungültig → Fehlerwert oder 0
+    nMonatsscheibe = 0;
+ENDIF;
+
+NumMonthProcessed = nMonatsscheibe;
+
+#Daten auf Sichtweise 'kumuliert' fortschreiben
+WHILE ( NumMonthProcessed <= 16 );
+    # Position des aktuellen Monats im Mapping-String berechnen
+    nPos = (NumMonthProcessed - 1) * 3 + 1;
+
+    # 3 Zeichen für den aktuellen Monat aus sMap holen
+    sMonatKurz = Subst(sMap, nPos, 3);
+
+    # Monatscheibe aufbauen, z.B. "Jan_25"
+    vMonatsscheibe = sMonatKurz | '_' | NumberToString(vJahr);
+    
+    #Daten in den Cube schreiben auf 'kumuliert'
+    CellPutN(vWert, dCube, vKostenstelle, vKostenart, 'Entwicklung', 'kumuliert', vVersion, vMonatsscheibe);
+    CellPutS(vBelegkopftext, dCube, vKostenstelle, vKostenart, 'Entwicklung', 'kumuliert', 'Belegkopftext', vMonatsscheibe);
+    CellPutS(vBelegtext, dCube, vKostenstelle, vKostenart, 'Entwicklung', 'kumuliert', 'Belegtext', vMonatsscheibe);
+    CellPutS(vBuchungsdatum, dCube, vKostenstelle, vKostenart, 'Entwicklung', 'kumuliert', 'Buchungsdatum', vMonatsscheibe);
+    CellPutS(vBuchungskonto, dCube, vKostenstelle, vKostenart, 'Entwicklung', 'kumuliert', 'Buchungskonto', vMonatsscheibe);
+
+    NumMonthProcessed = NumMonthProcessed + 1;
+END;
+
+NumRowsProcessed = NumRowsProcessed + 1;
+
+#endregion
+#region Epilog
+
+sEndTime = TIMST(NOW, '\Y-\m-\d \h:\i:\s');
+LogOutput('INFO', sProcName | ' beendet um ' | sEndTime);
+
+LogOutput(
+  'INFO',
+  sProcName |
+  ': Datensätze gesamt='   | NumberToString(NumRowsProcessed)   |
+  ', geladen='             | NumberToString(nRecLoaded)  |
+  ', übersprungen='        | NumberToString(nRecSkipped) |
+  ', Fehler='              | NumberToString(nRecError)
+);
+#endregion

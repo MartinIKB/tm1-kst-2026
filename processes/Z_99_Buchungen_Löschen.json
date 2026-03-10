@@ -1,0 +1,28 @@
+{
+	"@type":"Process",
+	"Name":"Z_99_Buchungen_Löschen",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"Z_99_Buchungen_Löschen.ti",
+	"VariablesUIData":
+	[
+		"VarType=32€ColType=827€"
+	],
+	"DataSource":
+	{
+		"Type":"TM1DimensionSubset",
+		"dataSourceNameForClient":"Kostenarten:Kostenarten",
+		"dataSourceNameForServer":"Kostenarten:Kostenarten",
+		"subset":"All"
+	},
+	"Parameters":[],
+	"Variables":
+	[
+		{
+			"Name":"vKostenarten",
+			"Type":"String",
+			"Position":1,
+			"StartByte":0,
+			"EndByte":0
+		}
+	]
+}

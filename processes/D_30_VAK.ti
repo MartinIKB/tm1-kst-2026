@@ -1,0 +1,17 @@
+#region Prolog
+MinorErrorLogMax = -1;
+OnMinorErrorDoItemSkip = 1;
+dCube= 'KST';
+CurrentLogSetting = CubeGetLogChanges(dCube);
+CubeSetLogChanges('KST', 0);
+NumRowsRead = 0;
+NumRowsProcessed = 0;
+SetInputCharacterSet('TM1CS_ISO_8859_1');
+
+#endregion
+#region Metadata
+NumRowsRead = NumRowsRead + 1;
+CellPutN(vWert, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, vVersion, vMonatsscheibe);
+NumRowsProcessed = NumRowsProcessed + 1;
+
+#endregion

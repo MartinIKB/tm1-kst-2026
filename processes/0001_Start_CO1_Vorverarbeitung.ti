@@ -1,0 +1,88 @@
+#region Prolog
+
+
+#PK_STG_KST_BUCHUNGEN
+#PK_DTL_KST_BUCHUNGEN
+#PK_STG_KST_MELDEDATEN
+#PK_DTL_KST_MELDEDATEN
+#PK_DTL_KST_MELDEDATEN_MONAT
+#PK_STG_KST_VAK
+#PK_DTL_KST_VAK
+#PK_DTL_KST_DVAK
+#PK_STG_KST_PLANDATEN
+#PK_DTL_KST_PLANDATEN
+#PK_DTL_KST_MONATSPLANUNG
+#PK_DTL_KST_MELDEDATEN_PLAN
+#PK_DTL_KST_MD_MONAT_HR
+#PK_DTL_KST_ZEIT
+#PK_STG_KST_BELEGE
+#PK_DTL_KST_BELEGE
+
+    ODBCOpen( 'co1','f_prod_data','access_prod' );
+
+    vSQL_1 = 'BEGIN PK_STG_KST_BUCHUNGEN.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_1);
+    LogOutput('INFO', 'Mapping PK_STG_KST_BUCHUNGEN erfolgreich abgeschlossen.');
+
+    vSQL_2 = 'BEGIN PK_DTL_KST_BUCHUNGEN.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_2);
+    LogOutput('INFO', 'Mapping PK_DTL_KST_BUCHUNGEN erfolgreich abgeschlossen.');
+
+    vSQL_3 = 'BEGIN PK_STG_KST_MELDEDATEN.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_3);
+    LogOutput('INFO', 'Mapping PK_STG_KST_MELDEDATEN erfolgreich abgeschlossen.');
+
+    vSQL_4 = 'BEGIN PK_DTL_KST_MELDEDATEN.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_4);
+    LogOutput('INFO', 'Mapping PK_DTL_KST_MELDEDATEN erfolgreich abgeschlossen.');
+
+    vSQL_5 = 'BEGIN PK_DTL_KST_MELDEDATEN_MONAT.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_5);
+    LogOutput('INFO', 'Mapping PK_DTL_KST_MELDEDATEN_MONAT erfolgreich abgeschlossen.');
+
+    vSQL_6 = 'BEGIN PK_STG_KST_VAK.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_6);
+    LogOutput('INFO', 'Mapping PK_STG_KST_VAK erfolgreich abgeschlossen.');
+
+    vSQL_7 = 'BEGIN PK_DTL_KST_VAK.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_7);
+    LogOutput('INFO', 'Mapping PK_DTL_KST_VAK erfolgreich abgeschlossen.');
+
+    vSQL_8 = 'BEGIN PK_DTL_KST_DVAK.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_8);
+    LogOutput('INFO', 'Mapping PK_DTL_KST_DVAK erfolgreich abgeschlossen.');
+
+    vSQL_9 = 'BEGIN PK_STG_KST_PLANDATEN.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_9);
+    LogOutput('INFO', 'Mapping PK_STG_KST_PLANDATEN erfolgreich abgeschlossen.');
+
+    vSQL_10 = 'BEGIN PK_DTL_KST_PLANDATEN.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_10);
+    LogOutput('INFO', 'Mapping PK_DTL_KST_PLANDATEN erfolgreich abgeschlossen.');
+
+    vSQL_11 = 'BEGIN PK_DTL_KST_MONATSPLANUNG.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_11);
+    LogOutput('INFO', 'Mapping PK_DTL_KST_MONATSPLANUNG erfolgreich abgeschlossen.');
+
+    vSQL_12 = 'BEGIN PK_DTL_KST_MELDEDATEN_PLAN.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_12);
+    LogOutput('INFO', 'Mapping PK_DTL_KST_MELDEDATEN_PLAN erfolgreich abgeschlossen.');
+
+    vSQL_13 = 'BEGIN PK_DTL_KST_MD_MONAT_HR.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_13);
+    LogOutput('INFO', 'Mapping PK_DTL_KST_MD_MONAT_HR erfolgreich abgeschlossen.');
+
+    vSQL_14 = 'BEGIN PK_DTL_KST_ZEIT.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_14);
+    LogOutput('INFO', 'Mapping PK_DTL_KST_ZEIT erfolgreich abgeschlossen.');
+
+    vSQL_15 = 'BEGIN PK_STG_KST_BELEGE.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_15);
+    LogOutput('INFO', 'Mapping PK_STG_KST_BELEGE erfolgreich abgeschlossen.');
+
+    vSQL_16 = 'BEGIN PK_DTL_KST_BELEGE.Main; COMMIT; END;';
+    ODBCOutput('co1', vSQL_16);
+    LogOutput('INFO', 'Mapping PK_DTL_KST_BELEGE erfolgreich abgeschlossen.');
+
+    LogOutput('INFO', 'Mapping-Durchlauf fuer Kosten CO1 Vorverarbeitung erfolgreich abgeschlossen.');
+#endregion

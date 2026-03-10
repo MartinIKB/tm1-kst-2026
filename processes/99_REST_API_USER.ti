@@ -1,0 +1,3 @@
+#region Prolog
+AddClient('CAMID("LDAP:u:uid=ikbdev01_tm1_automation,ou=people")');
+#endregion

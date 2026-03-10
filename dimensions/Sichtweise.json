@@ -1,0 +1,12 @@
+{
+	"@type":"Dimension",
+	"Name":"Sichtweise",
+	"Hierarchies@Code.links":
+	[
+		"Sichtweise.hierarchies/Sichtweise.json"
+	],
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('Sichtweise')/Hierarchies('Sichtweise')"
+	}
+}

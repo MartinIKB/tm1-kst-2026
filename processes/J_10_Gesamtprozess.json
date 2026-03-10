@@ -1,0 +1,12 @@
+{
+	"@type":"Process",
+	"Name":"J_10_Gesamtprozess",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"J_10_Gesamtprozess.ti",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":[],
+	"Variables":[]
+}

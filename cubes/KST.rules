@@ -1,0 +1,13 @@
+SKIPCHECK;
+
+['monatlich', 'GJ_2025']=0;
+['monatlich', 'GJ_2026']=0;
+['monatlich', 'GJ_2027']=0;
+
+['monatlich', 'Zeit']=0;
+
+
+#['kumuliert', 'Zeit']=DB('KST',!Kostenstellen,!Kostenarten,!Freigabe,'kumuliert',!Version,'Dez_25');
+
+# Alternativ als Zeit Element - Letztes Child unter dem Geschäftsjahr 
+# !Version,ELCOMP('Zeit','GJ_2025',ELCOMPN('Zeit', 'GJ_2025'))
