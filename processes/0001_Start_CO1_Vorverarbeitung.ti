@@ -1,6 +1,4 @@
 #region Prolog
-
-
 #PK_STG_KST_BUCHUNGEN
 #PK_DTL_KST_BUCHUNGEN
 #PK_STG_KST_MELDEDATEN
@@ -17,6 +15,8 @@
 #PK_DTL_KST_ZEIT
 #PK_STG_KST_BELEGE
 #PK_DTL_KST_BELEGE
+#aHahahahahHhhhhh, das crasht den Prozess!!!!!1111
+
 
     ODBCOpen( 'co1','f_prod_data','access_prod' );
 

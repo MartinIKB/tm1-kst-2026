@@ -55,11 +55,11 @@ ELSEIF(DIMIX('Kostenarten', vKostenart) = 0);
       LogOutput('ERROR', sProcName | ': unbekannte Kostenart "' | vKostenart | '" in Datensatz ' | NumberToString(nRecTotal)
   );
 ELSE;
-    CellPutN(vWert, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, vVersion, vMonatsscheibe);
-    CellPutS(vBelegkopftext, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, 'Belegkopftext', vMonatsscheibe);
-    CellPutS(vBelegtext, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, 'Belegtext', vMonatsscheibe);
-    CellPutS(vBuchungsdatum, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, 'Buchungsdatum', vMonatsscheibe);
-    CellPutS(vBuchungskonto, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, 'Buchungskonto', vMonatsscheibe);
+    CellPutN(vWert, dCube, 'Entwicklung', vKostenart, vKostenstelle, vSichtweise, vMonatsscheibe, vVersion);
+    CellPutS(vBelegkopftext, dCube, 'Entwicklung', vKostenart, vKostenstelle, vSichtweise, vMonatsscheibe, 'Belegkopftext');
+    CellPutS(vBelegtext, dCube, 'Entwicklung', vKostenart, vKostenstelle, vSichtweise, vMonatsscheibe, 'Belegtext');
+    CellPutS(vBuchungsdatum, dCube, 'Entwicklung', vKostenart, vKostenstelle, vSichtweise, vMonatsscheibe, 'Buchungsdatum');
+    CellPutS(vBuchungskonto, dCube, 'Entwicklung', vKostenart, vKostenstelle, vSichtweise, vMonatsscheibe, 'Buchungskonto');
     nRecLoaded = nRecLoaded + 1;
 ENDIF;
 
@@ -92,11 +92,11 @@ WHILE ( NumMonthProcessed <= 16 );
     vMonatsscheibe = sMonatKurz | '_' | NumberToString(vJahr);
     
     #Daten in den Cube schreiben auf 'kumuliert'
-    CellPutN(vWert, dCube, vKostenstelle, vKostenart, 'Entwicklung', 'kumuliert', vVersion, vMonatsscheibe);
-    CellPutS(vBelegkopftext, dCube, vKostenstelle, vKostenart, 'Entwicklung', 'kumuliert', 'Belegkopftext', vMonatsscheibe);
-    CellPutS(vBelegtext, dCube, vKostenstelle, vKostenart, 'Entwicklung', 'kumuliert', 'Belegtext', vMonatsscheibe);
-    CellPutS(vBuchungsdatum, dCube, vKostenstelle, vKostenart, 'Entwicklung', 'kumuliert', 'Buchungsdatum', vMonatsscheibe);
-    CellPutS(vBuchungskonto, dCube, vKostenstelle, vKostenart, 'Entwicklung', 'kumuliert', 'Buchungskonto', vMonatsscheibe);
+    CellPutN(vWert, dCube, 'Entwicklung', vKostenart, vKostenstelle, 'kumuliert', vMonatsscheibe, vVersion);
+    CellPutS(vBelegkopftext, dCube, 'Entwicklung', vKostenart, vKostenstelle, 'kumuliert', vMonatsscheibe, 'Belegkopftext');
+    CellPutS(vBelegtext, dCube, 'Entwicklung', vKostenart, vKostenstelle, 'kumuliert', vMonatsscheibe, 'Belegtext');
+    CellPutS(vBuchungsdatum, dCube, 'Entwicklung', vKostenart, vKostenstelle, 'kumuliert', vMonatsscheibe, 'Buchungsdatum');
+    CellPutS(vBuchungskonto, dCube, 'Entwicklung', vKostenart, vKostenstelle, 'kumuliert', vMonatsscheibe, 'Buchungskonto');
 
     NumMonthProcessed = NumMonthProcessed + 1;
 END;

@@ -4,22 +4,22 @@
 	"Dimensions":
 	[
 		{
-			"@id":"Dimensions('Kostenstellen')"
+			"@id":"Dimensions('Freigabe')"
 		},
 		{
 			"@id":"Dimensions('Kostenarten')"
 		},
 		{
-			"@id":"Dimensions('Freigabe')"
+			"@id":"Dimensions('Kostenstellen')"
 		},
 		{
 			"@id":"Dimensions('Sichtweise')"
 		},
 		{
-			"@id":"Dimensions('Version')"
+			"@id":"Dimensions('Zeit')"
 		},
 		{
-			"@id":"Dimensions('Zeit')"
+			"@id":"Dimensions('Version')"
 		}
 	],
 	"Rules@Code.link":"KST.rules",
@@ -27,8 +27,9 @@
 	{
 		"@id":"Dimensions('Version')"
 	},
-	"Views@Code.links":
-	[
-		"KST.views/VW_10190.json"
-	]
+	"TimeDimension":
+	{
+		"@id":"Dimensions('Zeit')"
+	},
+	"Views@Code.links":[]
 }

@@ -55,7 +55,7 @@ ELSEIF(DIMIX('Kostenarten', vKostenart) = 0);
       LogOutput('ERROR', sProcName | ': unbekannte Kostenart "' | vKostenart | '" in Datensatz ' | NumberToString(nRecTotal)
   );
 ELSE;
-    CellPutN(vWert, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, vVersion, vMonatsscheibe);
+    CellPutN(vWert, dCube, 'Entwicklung', vKostenart, vKostenstelle, vSichtweise, vMonatsscheibe, vVersion);
     nRecLoaded = nRecLoaded + 1;
 ENDIF;
 
@@ -90,11 +90,11 @@ WHILE ( NumMonthProcessed <= 16 );
     #Daten in den Cube auf 'kumuliert' schreiben. Nur auf die Zeit Elemente Jan bis Dez, nciht auf die Adjustment Positionen. Lineare Verteilung der Plankosten.
     IF(NumMonthProcessed<=12);
         vWert_kumuliert = NumMonthProcessed * vWert;
-        CellPutN(vWert_kumuliert, dCube, vKostenstelle, vKostenart, 'Entwicklung', 'kumuliert', vVersion, vMonatsscheibe);
+        CellPutN(vWert_kumuliert, dCube, 'Entwicklung', vKostenart, vKostenstelle, 'kumuliert', vMonatsscheibe, vVersion);
     ELSE;
     # für alle Zeitelemente 13-16 (Adjustment Positionen den GJ Endwert)
         vWert_kumuliert = 12 * vWert;
-        CellPutN(vWert_kumuliert, dCube, vKostenstelle, vKostenart, 'Entwicklung', 'kumuliert', vVersion, vMonatsscheibe);
+        CellPutN(vWert_kumuliert, dCube, 'Entwicklung', vKostenart, vKostenstelle, 'kumuliert', vMonatsscheibe, vVersion);
     ENDIF;
     
     NumMonthProcessed = NumMonthProcessed + 1;

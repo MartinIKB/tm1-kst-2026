@@ -55,7 +55,7 @@ ELSEIF(DIMIX('Kostenarten', vKostenart) = 0);
       LogOutput('ERROR', sProcName | ': unbekannte Kostenart "' | vKostenart | '" in Datensatz ' | NumberToString(nRecTotal)
   );
 ELSE;
-    CellPutN(vWert, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, vVersion, vMonatsscheibe);
+    CellPutN(vWert, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, vMonatsscheibe, vVersion);
     nRecLoaded = nRecLoaded + 1;
 ENDIF;
 
@@ -88,7 +88,7 @@ WHILE ( NumMonthProcessed <= 16 );
     vMonatsscheibe = sMonatKurz | '_' | NumberToString(vJahr);
     
     #Daten in den Cube schreiben auf 'kumuliert'
-    CellPutN(vWert, dCube, vKostenstelle, vKostenart, 'Entwicklung', 'kumuliert', vVersion, vMonatsscheibe);
+    CellPutN(vWert, dCube, vKostenstelle, vKostenart, 'Entwicklung', 'kumuliert', vMonatsscheibe, vVersion);
     
     NumMonthProcessed = NumMonthProcessed + 1;
 END;

@@ -11,7 +11,7 @@ SetInputCharacterSet('TM1CS_ISO_8859_1');
 #endregion
 #region Metadata
 NumRowsRead = NumRowsRead + 1;
-CellPutN(vWert, dCube, vKostenstelle, vKostenart, 'Entwicklung', vSichtweise, vVersion, vMonatsscheibe);
+CellPutN(vWert, dCube, 'Entwicklung', vKostenart, vKostenstelle, vSichtweise, vMonatsscheibe, vVersion);
 NumRowsProcessed = NumRowsProcessed + 1;
 
 #endregion
